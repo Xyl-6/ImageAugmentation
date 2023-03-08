@@ -19,12 +19,13 @@ def change(raw_img_dir, save_img_dir, raw_label_dir, save_label_dir):
         resized_img.save(os.path.join(save_img_dir, img_save_name))
         shutil.copy(os.path.join(raw_label_dir, name+'.txt'), os.path.join(save_label_dir, label_save_name))
     shutil.copy(os.path.join(raw_label_dir, 'classes.txt'), os.path.join(save_label_dir, 'classes.txt'))
+    return None
 
-raw_img_dir = '../raw_images/images'
-save_img_dir = '../raw_images/changed_imgs'
-raw_label_dir = '../raw_images/labels'
-save_label_dir = '../raw_images/changed_labels'
-change(raw_img_dir, save_img_dir, raw_label_dir, save_label_dir)
+# raw_img_dir = '../raw_images/images'
+# save_img_dir = '../raw_images/changed_imgs'
+# raw_label_dir = '../raw_images/labels'
+# save_label_dir = '../raw_images/changed_labels'
+# change(raw_img_dir, save_img_dir, raw_label_dir, save_label_dir)
 
 
 

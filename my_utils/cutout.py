@@ -13,7 +13,7 @@ Fill with black/color rectangles
 def cutout(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name):
     input_img_path = os.path.join(input_img_dir, name + '.jpg')
     input_label_path = os.path.join(input_label_dir, name + '.txt')
-    image = Image.open(input_img_path)
+    image = cv2.imread(input_img_path)
     min_size_ratio, max_size_ratio = 0.1, 0.3
     channel_wise = False
     max_crop = 4
@@ -37,7 +37,7 @@ def cutout(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name):
             cutout_image[shift_h:shift_h+h, shift_w:shift_w+w] = replacement
 
     save_img_path = os.path.join(save_img_dir, name + '_cutout.jpg')
-    cutout_image.save(save_img_path)
+    cv2.imwrite(save_img_path, image)
     save_label_path = os.path.join(save_label_dir, name + "_cutout.txt")
     shutil.copyfile(input_label_path, save_label_path)
 

@@ -41,9 +41,9 @@ def cutout(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name):
     save_label_path = os.path.join(save_label_dir, name + "_cutout.txt")
     shutil.copyfile(input_label_path, save_label_path)
 
-input_img_dir = '../raw_images/changed_imgs'
-input_label_dir = '../raw_images/changed_labels'
-save_img_dir = '../aug_images/images'
-save_label_dir = '../aug_images/labels'
-name = '1'
-cutout(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name)
+# input_img_dir = '../raw_images/changed_imgs'
+# input_label_dir = '../raw_images/changed_labels'
+# save_img_dir = '../aug_images/images'
+# save_label_dir = '../aug_images/labels'
+# name = '1'
+# cutout(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name)

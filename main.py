@@ -1,11 +1,19 @@
 import os
 import cv2
+import shutil
 from my_utils.change import *
 from my_utils.blur import *
 from my_utils.brighten import *
 from my_utils.sharpen import *
 from my_utils.cutout import *
 from my_utils.flip import *
+
+
+def copyto(input_img_path, input_label_path, save_img_dir, save_label_dir, save_kind, name):
+    save_img_path = os.path.join(save_img_dir, save_kind, name + '.jpg')
+    save_label_path = os.path.join(save_label_dir, save_kind, name + '.txt')
+    shutil.copy(input_img_path, save_img_path)
+    shutil.copy(input_label_path, save_label_path)
 
 
 if __name__ == '__main__':
@@ -39,6 +47,39 @@ if __name__ == '__main__':
         flip3(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name)
         flip4(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name)
         flip5(input_img_dir, save_img_dir, input_label_dir, save_label_dir, name)
+
+    # 将所得数据分类
+    input_img_dir = save_img_dir
+    input_label_dir = save_label_dir
+
+    final_img_dir = './datasets/images'
+    final_label_dir = './datasets/labels'
+
+    img_list = os.listdir(save_img_dir)
+    img_num = len(img_list)
+    for index, name_with_extention in enumerate(img_list, 1):
+        rate = (index*1.0)/img_num
+        name = os.path.splitext(name_with_extention)[0]
+        input_img_path = os.path.join(input_img_dir, name_with_extention)
+        input_label_path = os.path.join(input_label_dir, name+'.txt')
+        if rate <= 0.7:
+            copyto(input_img_path, input_label_path, final_img_dir, final_label_dir, save_kind='train', name=name)
+        elif rate <= 0.9:
+            copyto(input_img_path, input_label_path, final_img_dir, final_label_dir, save_kind='test', name=name)
+        else:
+            copyto(input_img_path, input_label_path, final_img_dir, final_label_dir, save_kind='val', name=name)
+
+
+
+
+
+# def copyto(input_img_path, input_label_path, save_img_dir, save_label_dir, save_kind, name):
+#     save_img_path = os.path.join(save_img_dir, save_kind, name+'.jpg')
+#     save_label_path = os.path.join(save_label_dir, save_kind, name+'.txt')
+#     shutil.copy(input_img_path, save_img_path)
+#     shutil.copy(input_label_path, save_label_path)
+
+
 
 
 
